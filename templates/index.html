@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب تكلفة الكتب</title>
+    <script>
+        function addBookForm() {
+            const container = document.getElementById('books-container');
+            const bookForm = `
+                <fieldset>
+                    <legend>تفاصيل الكتاب</legend>
+
+                    <label for="num_pages">عدد الصفحات:</label>
+                    <input type="number" name="books[][num_pages]" required><br>
+                    
+                    <label for="paper_size">حجم الورق:</label>
+                    <select name="books[][paper_size]" required>
+                        <option value="0.57 x 0.82">0.57 x 0.82</option>
+                        <option value="0.70 x 1.00">0.70 x 1.00</option>
+                        <option value="0.60 x 0.90">0.60 x 0.90</option>
+                    </select><br>
+                    
+                    <label for="paper_weight_per_m2">وزن الورق لكل متر مربع:</label>
+                    <select name="books[][paper_weight_per_m2]" required>
+                        <option value="0.05">0.05</option>
+                        <option value="0.06">0.06</option>
+                        <option value="0.07">0.07</option>
+                        <option value="0.08">0.08</option>
+                    </select><br>
+                    
+                    <label for="num_books">عدد الكتب:</label>
+                    <input type="number" name="books[][num_books]" required><br>
+                    
+                    <label for="num_colors">عدد الألوان:</label>
+                    <input type="number" name="books[][num_colors]" required><br>
+                    
+                    <label for="cover_type">نوع الغلاف:</label>
+                    <select name="books[][cover_type]" required>
+                        <option value="مجلد">مجلد</option>
+                        <option value="سحاب">سحاب</option>
+                        <option value="كرتونية">كرتونية</option>
+                        <option value="فني">فني</option>
+                    </select><br>
+                    
+                    <label for="cover_price">سعر الغلاف:</label>
+                    <input type="number" name="books[][cover_price]" step="0.01" required><br>
+                    
+                    <label for="profit_margin">نسبة الربح (%):</label>
+                    <input type="number" name="books[][profit_margin]" step="0.01" required><br>
+                    
+                    <label for="paper_price_per_ton">سعر الورق لكل طن:</label>
+                    <input type="number" name="books[][paper_price_per_ton]" step="0.01" required><br>
+                    
+                    <label for="waste">الهدر:</label>
+                    <input type="number" name="books[][waste]" required><br>
+                    
+                    <label for="num_moujalad">عدد المجلدات:</label>
+                    <input type="number" name="books[][num_moujalad]" required><br>
+
+                </fieldset>
+                <hr>
+            `;
+            container.insertAdjacentHTML('beforeend', bookForm);
+        }
+    </script>
+</head>
+<body>
+    <h1>حساب تكلفة الكتب المتعددة</h1>
+    <form action="/calculate_multiple" method="post">
+        <div id="books-container">
+            <!-- The first book form will be added here -->
+        </div>
+        <button type="button" onclick="addBookForm()">إضافة كتاب جديد</button>
+        <br><br>
+        <button type="submit">احسب التكلفة للكتب</button>
+    </form>
+</body>
+</html>

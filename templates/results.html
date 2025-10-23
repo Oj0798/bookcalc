@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نتائج الحساب للكتب المتعددة</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>نتائج الحساب للكتب المتعددة</h1>
+    {% if results %}
+    <table>
+        <thead>
+            <tr>
+                <th>عدد الصفحات</th>
+                <th>عدد الكتب</th>
+                <th>عدد الملازم</th>
+                <th>أبعاد الورق (الطول × العرض)</th>
+                <th>وزن الورق لكل دفتر (كغ)</th>
+                <th>تكلفة الورق ($)</th>
+                <th>تكلفة الطباعة ($)</th>
+                <th>تكلفة الطوي والتجميع ($)</th>
+                <th>تكلفة البلاكات ($)</th>
+                <th>تكلفة الشحن ($)</th>
+                <th>التكلفة الإجمالية بدون غلاف ($)</th>
+                <th>التكلفة الإجمالية مع الغلاف ($)</th>
+                <th>عدد المجالدات</th>
+                <th>السعر النهائي لكل كتاب ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in results %}
+            <tr>
+                <td>{{ book.num_pages }}</td>
+                <td>{{ book.num_books }}</td>
+                <td>{{ book.num_booklets }}</td>
+                <td>{{ book.paper_length }} x {{ book.paper_width }}</td>
+                <td>{{ book.paper_weight_per_booklet }}</td>
+                <td>{{ book.paper_cost }}</td>
+                <td>{{ book.printing_cost }}</td>
+                <td>{{ book.folding_cost }}</td>
+                <td>{{ book.plate_cost_total }}</td>
+                <td>{{ book.shipping_cost }}</td>
+                <td>{{ book.total_cost_without_cover }}</td>
+                <td>{{ book.total_cost_with_cover }}</td>
+                <td>{{ book.num_moujalad }}</td>
+                <td>{{ book.final_book_price }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>لم يتم العثور على نتائج.</p>
+    {% endif %}
+    <a href="/">احسب مرة أخرى</a>
+</body>
+</html>
